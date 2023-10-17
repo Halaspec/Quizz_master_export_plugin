@@ -2,10 +2,11 @@
 
 # PHASE 1 RECUPERER LA DATA DEPUIS LE SERVEUR
 # Database connection parameters
-DB_HOST="10.0.10.22"
-DB_USER="root"
-DB_PASS="hLEDAiM13F"
-DB_NAME="prixplaisir"
+DB_HOST=""
+DB_USER=""
+DB_PASS=""
+DB_NAME=""
+DB_PORT=""
 OUTPUT_FILE="data.txt"
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
@@ -13,7 +14,7 @@ NC='\033[0m' # No Color
 SQL_QUERY="select quiz_results from wp_mlw_results ;;"
 
 # Execute SQL query and save the result to CSV file
-mysql -h"$DB_HOST" -u"$DB_USER" -p"$DB_PASS" -D"$DB_NAME" -e"$SQL_QUERY" -P "30363" --batch --raw > "$OUTPUT_FILE"
+mysql -h"$DB_HOST" -u"$DB_USER" -p"$DB_PASS" -D"$DB_NAME" -e"$SQL_QUERY" -P "$PORT" --batch --raw > "$OUTPUT_FILE"
 
 (grep -o -P 'user_answer".*?s:[0-9]+:"[a-zA-Z]+.*?";.*?}' "$OUTPUT_FILE") > reponses_data.txt
 (grep -o -P 'question_title";s:\d+:"(.*?)";' "$OUTPUT_FILE") > questions_data.txt
